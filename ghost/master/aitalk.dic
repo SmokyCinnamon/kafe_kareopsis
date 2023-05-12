@@ -1,0 +1,37 @@
+OnAiTalk
+{
+	if CHAIN.IDName == ""
+	{
+		case чалавек {
+			when "" {LastTalk = MishaTalk}
+			when "" {LastTalk = JoraTalk}
+			others {LastTalk = MishaTalk}
+		}
+		//LastTalk = RandomTalk
+	}
+	else
+	{
+		LastTalk = ChainTalk
+	}
+	LastTalk
+}
+
+RandomTalk : nonoverlap_pool
+{
+
+}
+
+MishaTalk : nonoverlap_pool {
+	"\0\s[0]Міра... ты ведаеш Міра? Ну што ж, проста думаю...\e:chain=бывшая"
+}
+
+JoraTalk : nonoverlap_pool {
+	"Я зараз очень люблю шахматы. Ну, в нём не *граю*, но все яшчэ.\e:chain=шахы"
+}
+
+бывшая
+{{CHAIN
+	"Міра дазваляла мяне быць з Пашы бяз жалковання. Часам думаю - як было бы жыццё з ёй? Но гэта зря. Проста не добра быоі нвм разам. Гэта здарыцца."
+	"Но ўжо ведаеш ты што мы з Паша сябры. Што магу казаць? Мы блізка, вось і усё. Але..."
+	"Эх, я пра што гаварю? Ты не хочаш слухаць пра сваё жыццё. Ну ж, не пра гэтым. Шчаслівыя речы ёсць."
+}}CHAIN

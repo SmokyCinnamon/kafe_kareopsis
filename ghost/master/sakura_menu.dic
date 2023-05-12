@@ -1,0 +1,43 @@
+OnSakuraMenu : all {
+	"\0\s[0]\b2\![set,autoscroll,disable]"
+	if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //Это проверяние здесь, чтобы они не будет говорить, при нажатии кнопку 'назад'. удалить, если хочешь.
+	
+	"\n\n\_q"
+	
+	"\![*]\q[Размаўляй,OnAiTalk]"
+	if LastTalk != ""; "  \![*]\q[Кажыце гэта зноў?,OnLastTalk]"
+	"\n\n"
+	
+	"\![*]\q[Час размаўленне,OnTalkRateMenu]\n\n"
+	
+	"\![*]\q[...Гэта ўсё, пустой]"	
+}
+
+OnLastTalk {
+	LastTalk
+}
+
+OnTalkRateMenu : all {
+	//это просто настроить настройки. Если хочешь изменить или добавить времени, это возможно
+	_talkrate = "Адкл"
+	if aitalkinterval == 60; _talkrate = "1 хвіліна"
+	elseif aitalkinterval == 180; _talkrate = "3 хвіліны"
+	elseif aitalkinterval == 300; _talkrate = "5 хвілін"
+	elseif aitalkinterval == 600; _talkrate = "10 хвілін"
+	
+	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
+	"час размаўленне: %(_talkrate)\n\n"
+	
+	"\![*]\q[Выкл,OnTalkRateChange,0]\n"
+	"\![*]\q[1 хвіліна,OnTalkRateChange,60]\n"
+	"\![*]\q[3 хвіліны,OnTalkRateChange,180]\n"
+	"\![*]\q[5 хвіліны,OnTalkRateChange,300]\n"
+	"\![*]\q[10 хвілін,OnTalkRateChange,600]\n"
+	"\n"
+	"\![*]\q[Вярнуць,OnSakuraMenu]  \![*]\q[...Гэта ўсё,пустой]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+}

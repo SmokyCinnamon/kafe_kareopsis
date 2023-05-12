@@ -1,0 +1,5 @@
+charset,UTF-8
+type,ghost
+
+name,Kafe Kareopsis
+directory,kafe_kareopsis

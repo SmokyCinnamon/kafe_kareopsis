@@ -1,0 +1,16 @@
+charset,UTF-8
+
+name,Kafe Kareopsis
+type,ghost
+
+shiori,yaya.dll
+
+craftman,SmokyCinnamon + sacrificedbuns
+craftmanurl,https://smokycinnamon.github.io/indifferentsorrel/index.html
+
+sakura.name,Čalaviek
+kero.name,Jeda
+
+icon,icon.ico
+
+sstp.allowunspecifiedsend,0
