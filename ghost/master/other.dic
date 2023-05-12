@@ -6,7 +6,7 @@ OnTranslate {
 	{ //отправить вод скрипта : нет событии (ref2) , нет флаг (ref1)
 		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
 	}
-	_talk = REPLACE(_talk,"\e") + "\x\e")
+	_talk = REPLACE(_talk,"\e","\x\e")
 	
 	TOSTR(_talk)
 }
@@ -75,7 +75,8 @@ On_sakura.recommendsites
 //это веб-сайти, ссылкованы в самый верхный настроек меню правой кнопкой у сакуры. формат - простой, налево написать название ссыка, тогда точка с запятой, а направо-ссылка. они должны быть другие строки.
 recommendsites_sakura : array
 {
-	"название ссылка";	"https://link.example.com/link/to/whatever/here/"
+	"SmokyCinnamon";	"https://smokycinnamon.github.io/indifferentsorrel"
+	"sacrificedbuns";	""
 }
 
 On_sakura.portalsites 
@@ -86,8 +87,7 @@ On_sakura.portalsites
 //Той самый вещь, но для вторая кнопка
 portalsites_sakura : array
 {
-	"другое название";	"https://link.example.com/link/to/whatever/here/again/"
-	"третье название";	"https://link.example.com/link/to/whatever/a/third/time/you/can/add/as/many/as/you/want/"
+	//"другое название";	"https://link.example.com/link/to/whatever/here/again/"
 }
 
 On_kero.recommendsites
@@ -98,14 +98,14 @@ On_kero.recommendsites
 //как меню сакура, но для керо
 recommendsites_kero : array
 {
-	"эти названия может быть что угодно";	"https://link.example.com/link/to/whatever/here/once/more/"
+	//"эти названия может быть что угодно";	"https://link.example.com/link/to/whatever/here/once/more/"
 }
 
 //скопирован с файли SHIORI, с добавление переменная имя
 OnNotifyUserInfo : void
 {
 	SHIORI3FW.UserName = reference[0]
-	нік = reference[0]
+	if нік == ""; нік = reference[0]
 	SHIORI3FW.UserNameFull = reference[1]
 	SHIORI3FW.UserBirthday = SPLIT(reference[2],',',3)
 	for _i = 0 ; _i < 3 ; _i++ {

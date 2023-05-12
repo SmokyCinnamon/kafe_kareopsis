@@ -1,6 +1,6 @@
 charset,UTF-8
 
-name,Kafe Kareopsis
+name,Kafe Kareopsis Hutarkam
 type,ghost
 
 shiori,yaya.dll
@@ -9,7 +9,7 @@ craftman,SmokyCinnamon + sacrificedbuns
 craftmanurl,https://smokycinnamon.github.io/indifferentsorrel/index.html
 
 sakura.name,Čalaviek
-kero.name,Jeda
+kero.name,Ježa
 
 icon,icon.ico
 

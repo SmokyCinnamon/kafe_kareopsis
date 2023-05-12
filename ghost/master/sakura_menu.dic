@@ -2,15 +2,17 @@ OnSakuraMenu : all {
 	"\0\s[0]\b2\![set,autoscroll,disable]"
 	if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //Это проверяние здесь, чтобы они не будет говорить, при нажатии кнопку 'назад'. удалить, если хочешь.
 	
-	"\n\n\_q"
+	"\_q\n[half]"
+	if можнаЗаказваць == 1; "\__q[OnOrderMenu]==-=Заказвай\__q"
+	" \__q[OnToggleMova](мова меню: %(мова))=-==\__q\n\n"
+	"%*\q[Размаўляй,OnAiTalk]"
+	if LastTalk != ""; "  %*\q[Кажыце гэта зноў?,OnLastTalk]"
+	"\n"
+	"%*\__q[OnNameTeach]Нік: %(нік)\__q\n"
+	"%*\q[Час размаўленне,OnTalkRateMenu]\n"
 	
-	"\![*]\q[Размаўляй,OnAiTalk]"
-	if LastTalk != ""; "  \![*]\q[Кажыце гэта зноў?,OnLastTalk]"
-	"\n\n"
-	
-	"\![*]\q[Час размаўленне,OnTalkRateMenu]\n\n"
-	
-	"\![*]\q[...Гэта ўсё, пустой]"	
+	"\n[half]%*\q[...Гэта ўсё, пустой]\n\n[half]"
+	"Ежа: %(ежа) Напой: %(напой)\_q"
 }
 
 OnLastTalk {
@@ -23,21 +25,130 @@ OnTalkRateMenu : all {
 	if aitalkinterval == 60; _talkrate = "1 хвіліна"
 	elseif aitalkinterval == 180; _talkrate = "3 хвіліны"
 	elseif aitalkinterval == 300; _talkrate = "5 хвілін"
-	elseif aitalkinterval == 600; _talkrate = "10 хвілін"
 	
 	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
 	"час размаўленне: %(_talkrate)\n\n"
 	
-	"\![*]\q[Выкл,OnTalkRateChange,0]\n"
+	"\![*]\q[Адкл,OnTalkRateChange,0]\n"
 	"\![*]\q[1 хвіліна,OnTalkRateChange,60]\n"
 	"\![*]\q[3 хвіліны,OnTalkRateChange,180]\n"
 	"\![*]\q[5 хвіліны,OnTalkRateChange,300]\n"
-	"\![*]\q[10 хвілін,OnTalkRateChange,600]\n"
 	"\n"
-	"\![*]\q[Вярнуць,OnSakuraMenu]  \![*]\q[...Гэта ўсё,пустой]"
+	"%*\q[Вярнуць,OnSakuraMenu]  %*\q[...Гэта ўсё,пустой]"
 }
 
 OnTalkRateChange
 {
 	aitalkinterval = TOINT(reference0)
+}
+
+OnToggleMova {
+	if мова == "бел." {
+		мова = "Рус."
+	}
+	elseif мова == "Рус." {
+		мова = "Англ."
+	}
+	else {
+		мова = "бел."
+	}
+	OnSakuraMenu
+}
+
+OnNameTeach {
+	LOGGING("%(reference)")
+	if reference2 == "rename" {
+		нік = reference0
+		OnSakuraMenu
+	}
+	else {
+		"\![open,inputbox,OnNameTeach,-1,--text=Нік,--reference=rename]"
+	}
+}
+
+OnOrderMenu : all {
+	_агляд = ""
+	_другыАгляд = ""
+	"\b[2]\_q==-Напоі-==\n\n[half]"
+	foreach масіўНапоі; _напой {
+		if заказаліНапой == 1 {
+			_агляд += "%*\f[color,disabled]%(_напой) "
+		}
+		else {
+			_агляд += "%*\__q[OnOrder,напой,%(_напой)]%(_напой)\__q "
+		}
+	}
+	"%(_агляд)\f[color,default]"
+	"\n\n[half]==-Ежа-==\n\n[half]"
+	foreach масіўЕжа; _ежа {
+		if заказаліЕжа == 1 {
+			_другыАгляд += "%*\f[color,disabled]%(_ежа) "
+		}
+		else {
+			_другыАгляд += "%*\__q[OnOrder,ежа,%(_ежа)]%(_ежа)\__q "
+		}
+	}
+	"%(_другыАгляд)\f[color,default]"
+	"\n\n%*\q[Вярнуць,OnSakuraMenu]  %*\q[...Гэта ўсё,пустой]\_q"
+}
+
+OnOrder {
+	if reference0 == "напой" {
+		заказаліНапой = 1
+		напой = "%(reference1)"
+	}
+	else {
+		заказаліЕжа = 1
+		ежа = "%(reference1)"
+	}
+	OnOrderMenu
+}
+
+масіўЕжа : array {
+	case мова {
+		when "Англ." {
+			"Cinnamon Bun"
+			"Bagel"
+			"Cheesecake"
+			"Donut"
+			"Macarons"
+			"Chocolates"
+		}
+		when "Рус." {
+			"Улитка с Корицей"
+			"Бейгл"
+			"Чизкейк"
+			"Пончик"
+			"Макарон"
+			"Шоколад"
+		}
+		others { //default to by
+			"Булачка з Карыцей"
+			"Бэйгл"
+			"Сырны пірог"
+			"Пончык"
+			"Макарон"
+			"Шакалад"
+		}
+	}
+}
+
+масіўНапоі : array {
+	case мова {
+		when "Англ." {
+			"Coffee"
+			"Tea"
+			"Smoothie"
+		}
+		when "Рус." {
+			"Кофе"
+			"Чай"
+			"Смуэи"
+		}
+		others { //default to by
+			"Кава"
+			"Гарбата"
+			"Смуэі"
+		}
+	}
 }

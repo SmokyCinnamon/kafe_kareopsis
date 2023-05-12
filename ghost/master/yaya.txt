@@ -14,7 +14,7 @@ dic, mouse.dic
 dic, meta.dic
 dic, other.dic
 dic, sakura_menu.dic
-dic, word.dic
+dic, markdown_processor.dic
 
 msglang,english
 

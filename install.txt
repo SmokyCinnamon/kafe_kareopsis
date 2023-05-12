@@ -1,5 +1,5 @@
 charset,UTF-8
 type,ghost
 
-name,Kafe Kareopsis
+name,Kafe Kareopsis Hutarkam
 directory,kafe_kareopsis
