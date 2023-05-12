@@ -1,10 +1,11 @@
 OnAiTalk
 {
+	if размаўленне <= 6; размаўленне++
 	if CHAIN.IDName == ""
 	{
 		case чалавек {
-			when "" {LastTalk = MishaTalk}
-			when "" {LastTalk = JoraTalk}
+			when "Міша" {LastTalk = MishaTalk}
+			when "Жора" {LastTalk = JoraTalk}
 			others {LastTalk = MishaTalk}
 		}
 		//LastTalk = RandomTalk

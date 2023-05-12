@@ -3,43 +3,21 @@ OnSakuraMenu : all {
 	if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //Это проверяние здесь, чтобы они не будет говорить, при нажатии кнопку 'назад'. удалить, если хочешь.
 	
 	"\_q\n[half]"
-	if можнаЗаказваць == 1; "\__q[OnOrderMenu]==-=Заказвай\__q"
-	" \__q[OnToggleMova](мова меню: %(мова))=-==\__q\n\n"
+	if можнаЗаказваць == 1; "\__q[OnOrderMenu]==-=Заказвай=-==\__q"
+	" \__q[OnToggleMova]-=(мова меню: ==%(мова)==)=-\__q\n\n"
 	"%*\q[Размаўляй,OnAiTalk]"
 	if LastTalk != ""; "  %*\q[Кажыце гэта зноў?,OnLastTalk]"
 	"\n"
-	"%*\__q[OnNameTeach]Нік: %(нік)\__q\n"
-	"%*\q[Час размаўленне,OnTalkRateMenu]\n"
+	"%*\__q[OnLikAckou]Лік ачкоў\__q\n"
+	"%*\__q[OnNameTeach]Нік: %(нік)\__q\n" //other.dic
+	"%*\q[Час размаўленне,OnTalkRateMenu]\n" //other.dic
 	
 	"\n[half]%*\q[...Гэта ўсё, пустой]\n\n[half]"
-	"Ежа: %(ежа) Напой: %(напой)\_q"
+	"Ежа: %(ежа) Напой: %(напой) | %(размаўленне) | %(хвілінаІдзе)\_q"
 }
 
 OnLastTalk {
 	LastTalk
-}
-
-OnTalkRateMenu : all {
-	//это просто настроить настройки. Если хочешь изменить или добавить времени, это возможно
-	_talkrate = "Адкл"
-	if aitalkinterval == 60; _talkrate = "1 хвіліна"
-	elseif aitalkinterval == 180; _talkrate = "3 хвіліны"
-	elseif aitalkinterval == 300; _talkrate = "5 хвілін"
-	
-	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
-	"час размаўленне: %(_talkrate)\n\n"
-	
-	"\![*]\q[Адкл,OnTalkRateChange,0]\n"
-	"\![*]\q[1 хвіліна,OnTalkRateChange,60]\n"
-	"\![*]\q[3 хвіліны,OnTalkRateChange,180]\n"
-	"\![*]\q[5 хвіліны,OnTalkRateChange,300]\n"
-	"\n"
-	"%*\q[Вярнуць,OnSakuraMenu]  %*\q[...Гэта ўсё,пустой]"
-}
-
-OnTalkRateChange
-{
-	aitalkinterval = TOINT(reference0)
 }
 
 OnToggleMova {
@@ -55,18 +33,18 @@ OnToggleMova {
 	OnSakuraMenu
 }
 
-OnNameTeach {
-	LOGGING("%(reference)")
-	if reference2 == "rename" {
-		нік = reference0
-		OnSakuraMenu
-	}
-	else {
-		"\![open,inputbox,OnNameTeach,-1,--text=Нік,--reference=rename]"
-	}
+OnLikAckou : all {
+	"\_q"
+	"Ты...\n\n[half]"
+	"елі брудну ежу %(еліБрудны) раз\n"
+	"елі ежа у іншыя чалавекі %(еліІх) раз\n"
+	"харчавалі імі %(харчаваліІмі) раз\n"
+	"харчавалі імі брудну ежу %(харчаваліБрудны) раз\n"
+	"\n\n[half]%*\q[Вярнуць,OnSakuraMenu]  %*\q[...Гэта ўсё,пустой]\_q"
 }
 
 OnOrderMenu : all {
+	if ежа != "" && напой != "" || заказаліНапой == 1 && заказаліЕжа == 1; можнаЗаказваць = 0
 	_агляд = ""
 	_другыАгляд = ""
 	"\b[2]\_q==-Напоі-==\n\n[half]"
@@ -93,6 +71,7 @@ OnOrderMenu : all {
 }
 
 OnOrder {
+	if першыЗаказ == 0; першыЗаказ = 1
 	if reference0 == "напой" {
 		заказаліНапой = 1
 		напой = "%(reference1)"
@@ -143,12 +122,40 @@ OnOrder {
 		when "Рус." {
 			"Кофе"
 			"Чай"
-			"Смуэи"
+			"Смузи"
 		}
 		others { //default to by
 			"Кава"
 			"Гарбата"
-			"Смуэі"
+			"Смузі"
 		}
+	}
+}
+
+OnCalaviekZakaz {
+	if reference0 == "заказ" {
+		if reference2 != "" {
+			заказаліНапой = 1
+			напой = "%(reference2)"
+		}
+		if reference1 != "" {
+			заказаліЕжа = 1
+			ежа = "%(reference1)"
+		}
+	}
+	else {
+		чалавекзаказвалі = 1
+		_ежа = ""
+		_напой = ""
+		case чалавек {
+			when "Міша" {
+				"...Ну, калі ты не хочаш есці, я буду атрымаць для сябе %(_ежа = масіўЕжа[0]) і %(_напой = масіўНапоі[0])."
+			}
+			when "Жора" {
+				"Нічога не хочаш? Ну, я хачу %(_ежа = масіўЕжа[3]). А буду есці ему сам!"
+			}
+			others {}
+		}
+		--; "\x\![raise,OnCalaviekZakaz,заказ,%(_ежа),%(_напой)]"
 	}
 }

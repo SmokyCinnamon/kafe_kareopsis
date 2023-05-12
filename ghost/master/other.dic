@@ -7,6 +7,96 @@ OnTranslate {
 		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
 	}
 	_talk = REPLACE(_talk,"\e","\x\e")
+	case чалавек {
+		when "Жора" {
+			_talk = REPLACE(_talk,"\s[0]","\s")
+			_talk = REPLACE(_talk,"\s[1]","\s")
+			_talk = REPLACE(_talk,"\s[2]","\s")
+			_talk = REPLACE(_talk,"\s[3]","\s")
+			_talk = REPLACE(_talk,"\s[4]","\s")
+			_talk = REPLACE(_talk,"\s[5]","\s")
+			_talk = REPLACE(_talk,"\s[6]","\s")
+			_talk = REPLACE(_talk,"\s[7]","\s")
+			_talk = REPLACE(_talk,"\s[8]","\s")
+			_talk = REPLACE(_talk,"\s[9]","\s")
+		}
+		others {}
+	}
+	if "брудны" _in_ ежа {
+		case ежа {
+			when "Cinnamon Bun", "Улитка с Корицей", "Булачка з Карыцей" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Bagel", "Бейгл", "Бэйгл" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Cheesecake", "Чизкейк", "Сырны пірог" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Donut", "Пончик", "Пончык" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Macarons", "Макарон", "Макарон" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Chocolates", "Шоколад", "Шакалад" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			others {}
+		}
+	}
+	else {
+		case ежа {
+			when "Cinnamon Bun", "Улитка с Корицей", "Булачка з Карыцей" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Bagel", "Бейгл", "Бэйгл" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Cheesecake", "Чизкейк", "Сырны пірог" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Donut", "Пончик", "Пончык" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Macarons", "Макарон", "Макарон" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			when "Chocolates", "Шоколад", "Шакалад" {
+				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+			}
+			others {}
+		}
+	}
+	if "брудны" _in_ напой {
+		case напой {
+			when "Coffee", "Кофе", "Кава" {
+				_talk = REPLACE(_talk,"\s[20]","\s\i[1]")
+			}
+			when "Tea", "Чай", "Гарбата" {
+				_talk = REPLACE(_talk,"\s[20]","\s\i[1]")
+			}
+			when "Smoothie", "Смузи", "Смузі" {
+				_talk = REPLACE(_talk,"\s[20]","\s\i[1]")
+			}
+			others {}
+		}
+	}
+	else {
+		case напой {
+			when "Coffee", "Кофе", "Кава" {
+				_talk = REPLACE(_talk,"\s[20]","\s\i[1]")
+			}
+			when "Tea", "Чай", "Гарбата" {
+				_talk = REPLACE(_talk,"\s[20]","\s\i[1]")
+			}
+			when "Smoothie", "Смузи", "Смузі" {
+				_talk = REPLACE(_talk,"\s[20]","\s\i[1]")
+			}
+			others {}
+		}
+	}
+	
 	
 	TOSTR(_talk)
 }
@@ -112,6 +202,56 @@ OnNotifyUserInfo : void
 		SHIORI3FW.UserBirthday[_i] = TOINT(SHIORI3FW.UserBirthday[_i])
 	}
 	SHIORI3FW.UserSex = reference[3]
+}
+
+OnMinuteChange {
+	хвілінаІдзе++
+	if хвілінаІдзе == 6 && першыЗаказ == 0 || першыЗаказ == 0 && размаўленне == 6 {
+		можнаЗаказваць = 1
+	}
+	elseif хвілінаІдзе == 36 && першыЗаказ == 0 || першыЗаказ == 0 && размаўленне == 36 {
+		можнаЗаказваць = 0
+		першыЗаказ = 1
+		OnCalaviekZakaz
+	}
+	elseif хвілінаІдзе == 180 && ежа == "" {
+		хвілінаІдзе = 0
+		можнаЗаказваць = 1
+	}
+}
+
+OnTalkRateMenu : all {
+	//это просто настроить настройки. Если хочешь изменить или добавить времени, это возможно
+	_talkrate = "Адкл"
+	if aitalkinterval == 60; _talkrate = "1 хвіліна"
+	elseif aitalkinterval == 180; _talkrate = "3 хвіліны"
+	elseif aitalkinterval == 300; _talkrate = "5 хвілін"
+	
+	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
+	"час размаўленне: %(_talkrate)\n\n"
+	
+	"\![*]\q[Адкл,OnTalkRateChange,0]\n"
+	"\![*]\q[1 хвіліна,OnTalkRateChange,60]\n"
+	"\![*]\q[3 хвіліны,OnTalkRateChange,180]\n"
+	"\![*]\q[5 хвіліны,OnTalkRateChange,300]\n"
+	"\n"
+	"%*\q[Вярнуць,OnSakuraMenu]  %*\q[...Гэта ўсё,пустой]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+}
+
+OnNameTeach {
+	LOGGING("%(reference)")
+	if reference2 == "rename" {
+		нік = reference0
+		OnSakuraMenu
+	}
+	else {
+		"\![open,inputbox,OnNameTeach,-1,--text=Нік,--reference=rename]"
+	}
 }
 
 //Written by Zichqec https://zichqec.github.io/s-the-skeleton/
