@@ -7,6 +7,13 @@ OnTranslate {
 		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
 	}
 	_talk = REPLACE(_talk,"\e","\x\e")
+	
+	if RE_SEARCH(_talk,'(Як(\S+))[^Як]') {
+		//doesnt catch punctuation
+		_replace = IARRAY
+		_replace = RE_GETSTR
+		_talk = RE_REPLACE(_talk,'(Як(\S+))[^Як]',"\_a[OnAnchorSelect,масіў,%(_replace[2])]%(_replace[2])\_a ")
+	}
 	/*case чалавек {
 		when "Жора" {
 			_talk = REPLACE(_talk,"\s[0]","\s")
@@ -104,6 +111,13 @@ OnTranslate {
 
 OnAnchorSelect {
 	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
+	if reference0 == "масіў" {
+		if ASEARCH(reference1,масіўЯкары) != -1 {LOGGING("Нічога новага")}
+		else {
+			масіўЯкары ,= "%(reference1)"
+		}
+		LOGGING(масіўЯкары)
+	}
 }
 
 //горячие клавищи
@@ -185,6 +199,13 @@ OnMinuteChange {
 		OnCalaviekZakaz
 	}
 	elseif хвілінаІдзе == 180 && ежа == "" {
+		хвілінаІдзе = 0
+		можнаЗаказваць = 1
+	}
+	elseif хвілінаІдзе == 180 && ежа != "" {
+		OnCalaviekJesci
+	}
+	elseif хвілінаІдзе == 360 && ежа == "" {
 		хвілінаІдзе = 0
 		можнаЗаказваць = 1
 	}
