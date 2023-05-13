@@ -7,7 +7,7 @@ OnTranslate {
 		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
 	}
 	_talk = REPLACE(_talk,"\e","\x\e")
-	case чалавек {
+	/*case чалавек {
 		when "Жора" {
 			_talk = REPLACE(_talk,"\s[0]","\s")
 			_talk = REPLACE(_talk,"\s[1]","\s")
@@ -95,59 +95,39 @@ OnTranslate {
 			}
 			others {}
 		}
-	}
+	}*/
 	
 	
 	TOSTR(_talk)
 }
 
-//это просто здесь, что ты можешь ссылковать веб-сайти как якорь, но обычные выбори меню ещё работает! Если так сделаешь, полезный просмотр будет в поле с текстом
-OnAnchorSelect
-{
+
+OnAnchorSelect {
 	if "http://" _in_ reference0 || "https://" _in_ reference0; "\j[""%(reference0)""]"
 }
 
 //горячие клавищи
-OnKeyPress
-{
+OnKeyPress {
 	if reference0 == "f1"; "\![open,readme]"
 	elseif reference0 == "t"; OnAiTalk
 	elseif reference0 == "r"; OnLastTalk
 }
 
-//происходит примерно 30 секундов после конца скрипт, чтобы вернуть им к нормальные позы
-OnSurfaceRestore
-{
-	"\1\s[10]\0\s[0]"
+/*OnSurfaceRestore {
+	"\1\s[]\2\s[]\0\s[0]"
 }
 
-//Это происходить, когда привидение было не скрытой. Тебе можно добавить диалог, но это тебе не нужно. Это событие здесь, потому что если оно нету, поверхности будут \0\s[0]\1\s[10], по умолчанию, а иногда это не хочешь. Например, если твоё привидение использовает другие поверхности, или есть другой число персонажи.
-OnWindowStateRestore
-{
-	"\1\s[10]\0\s[0]"
-}
+OnWindowStateRestore {
+	"\1\s[]\2\s[]\0\s[0]"
+}*/
 
-//URL обновление по сети. Проверьте, что в концом есть /, иначе это даёт предупреждение перед обновлении! Если не будешь настроить обновления, удалить это
-//если используешь github: НЕ ИСПОЛЬЗУЙ URL-И github.iо! Это даёт тебе только боль и страдание. используй raw.githubusercontent!!!
-//чтобы очень легко найти ссылку:
-//• открыть свой репо в сети
-//• перейти в папка привидении (первый этал, с install.txt, readme.txt, и.т.д)
-//• нажмите на любой файл .txt
-//• на тую страницу, нажмите кнопку "raw". теперь ссылка должа начинать с raw.githubusercontent
-//• скопировуйте ссылку вот так и есть, только без название файл в конце
-//Тадам! Вот свою ссылку! Тестировуйте её! с этом поможет Палитра разработчика, и лог скрипт/сети
-
-On_homeurl
-{
-	""
-}
+On_homeurl {"https://raw.githubusercontent.com/SmokyCinnamon/kafe_kareopsis/main/"}
 
 
 //—————————————————————————————— ссылки меню нажатие правой кнопкой ——————————————————————————————
 
 //форматировать массив попеременные названия и URL-и для использование с меню правой кнопки
-FormatLinks : all
-{
+FormatLinks : all {
 	for _i = 0; _i < ARRAYSIZE(_argv); _i++
 	{
 		_argv[_i] //добавить ссылка / название
@@ -157,22 +137,15 @@ FormatLinks : all
 	}
 }
 
-On_sakura.recommendsites
-{
-	FormatLinks(recommendsites_sakura)
-}
+On_sakura.recommendsites {FormatLinks(recommendsites_sakura)}
 
 //это веб-сайти, ссылкованы в самый верхный настроек меню правой кнопкой у сакуры. формат - простой, налево написать название ссыка, тогда точка с запятой, а направо-ссылка. они должны быть другие строки.
-recommendsites_sakura : array
-{
+recommendsites_sakura : array {
 	"SmokyCinnamon";	"https://smokycinnamon.github.io/indifferentsorrel"
 	"sacrificedbuns";	""
 }
 
-On_sakura.portalsites 
-{
-	FormatLinks(portalsites_sakura)
-}
+On_sakura.portalsites {FormatLinks(portalsites_sakura)}
 
 //Той самый вещь, но для вторая кнопка
 portalsites_sakura : array
@@ -180,10 +153,7 @@ portalsites_sakura : array
 	//"другое название";	"https://link.example.com/link/to/whatever/here/again/"
 }
 
-On_kero.recommendsites
-{
-	FormatLinks(recommendsites_kero)
-}
+On_kero.recommendsites {FormatLinks(recommendsites_kero)}
 
 //как меню сакура, но для керо
 recommendsites_kero : array
@@ -225,7 +195,6 @@ OnTalkRateMenu : all {
 	_talkrate = "Адкл"
 	if aitalkinterval == 60; _talkrate = "1 хвіліна"
 	elseif aitalkinterval == 180; _talkrate = "3 хвіліны"
-	elseif aitalkinterval == 300; _talkrate = "5 хвілін"
 	
 	"\0\s[0]\b2\![set,autoscroll,disable]\_q"
 	"час размаўленне: %(_talkrate)\n\n"
@@ -233,7 +202,6 @@ OnTalkRateMenu : all {
 	"\![*]\q[Адкл,OnTalkRateChange,0]\n"
 	"\![*]\q[1 хвіліна,OnTalkRateChange,60]\n"
 	"\![*]\q[3 хвіліны,OnTalkRateChange,180]\n"
-	"\![*]\q[5 хвіліны,OnTalkRateChange,300]\n"
 	"\n"
 	"%*\q[Вярнуць,OnSakuraMenu]  %*\q[...Гэта ўсё,пустой]"
 }
@@ -241,6 +209,7 @@ OnTalkRateMenu : all {
 OnTalkRateChange
 {
 	aitalkinterval = TOINT(reference0)
+	OnTalkRateMenu
 }
 
 OnNameTeach {
@@ -254,50 +223,3 @@ OnNameTeach {
 	}
 }
 
-//Written by Zichqec https://zichqec.github.io/s-the-skeleton/
-/*
-This function should work in any YAYA ghost. Just copy the whole function into your ghost somewhere, and it should be applied automatically!
-If you're using AYA, you can just copy over the entire if check into your normal OnTranslate function, and leave out the other lines of code.
-
-
-How to write your dialogues with this processor:
-
-This is some dialogue. Pauses will be inserted after punctuation marks, so long as there is a space after them! If you want to control the timing manually...\w8\w8\w8\w8 you can do that too. \n\nMake sure you add a space before linebreaks if you want the previous sentence to have a pause after it.\![dummy-tag] You can also purposefully not add a space (or put another tag in the way) if you want to omit the pause.
-
-With the default setup, this would be the output:
-
-This is some dialogue.\w8 Pauses will be inserted after punctuation marks,\w4 so long as there is a space after them!\w8 If you want to control the timing manually...\w8\w8\w8\w8 you can do that too.\w8 \n\nMake sure you add a space before linebreaks if you want the previous sentence to have a pause after it.\![dummy-tag] You can also purposefully not add a space (or put another tag in the way) if you want to omit the pause.
-
-
-Pause tags are added after punctuation marks, but ONLY if that punctuation mark is followed immediately by a space. You can use this to control whether or not a pause is added at any point in your dialogue.
-
-You can also add \![no-autopause] anywhere in a script to prevent pauses from being added in any part of the script! This is useful for things like menus.
-Be careful that you don't have a comma and space combination in your sakurascript tags! As long as you write them like \![raise,OnThing,Arg 1] and not \![raise, OnThing, Arg 1], you should be fine.
-
-You can adjust this all how you like. I also included options to handle ellipsis separately.
-You'll have to be a bit mindful of how you write your dialogues, but this can make it much easier/cleaner in general!
-*/
-OnTranslateInternal.AutoPauses
-{
-	_talk = _argv[0]
-	
-	if "\![no-autopause]" !_in_ _talk
-	{
-		/*
-		//Additional options if you want ellipsis to have little pauses between each dot. Personally, I think I want to do that manually, for when I want a particular flavor.
-		
-		_talk = REPLACE(_talk,"... ",".\w2.\w2.\w8 ") //Ellipsis
-		_talk = REPLACE(_talk,"..? ",".\w2.\w2?\w8 ") //Question mark + ellipsis
-		_talk = REPLACE(_talk,"..! ",".\w2.\w2!\w8 ") //Exclamation point + ellipsis
-		*/
-		
-		_talk = REPLACE(_talk,", ",",\w3 ") //Comma
-		_talk = REPLACE(_talk,". ",".\w6 ") //Period
-		_talk = REPLACE(_talk,"? ","?\w6 ") //Question mark
-		_talk = REPLACE(_talk,"! ","!\w6 ") //Exclamation point
-		//_talk = REPLACE(_talk,"- ","-\w8 ") //Dash - This one seems to happen a lot when I don't want it, so I am commenting it out
-		_talk = REPLACE(_talk,"; ",";\w3 ") //Semicolon
-	}
-	
-	_talk
-}
