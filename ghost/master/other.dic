@@ -115,6 +115,8 @@ OnAnchorSelect {
 		if ASEARCH(reference1,масіўЯкары) != -1 {LOGGING("Нічога новага")}
 		else {
 			масіўЯкары ,= "%(reference1)"
+			//"\C\f[align,left]\f[color,disable]Цікавынка дадзена\f[default]"
+			//doesnt work right now
 		}
 		LOGGING(масіўЯкары)
 	}

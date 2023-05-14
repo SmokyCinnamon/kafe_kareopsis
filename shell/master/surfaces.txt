@@ -15,9 +15,7 @@ descript
 surface0
 
 //blink
-{
-	collision,145,30,213,65,head
-	
+{	
 	animation0.interval,random,5
 	animation0.pattern1,overlay,1002,0,0,0
 	animation0.pattern2,overlay,1001,100,0,0
@@ -104,6 +102,11 @@ surface11
 element1,overlay,surface1510.png,0,0
 }
 
-mouseup0,head,system:hand 
+mouseup0,head,system:hand
+
+surface.append0-11,!10
+{
+	collision,145,30,213,65,head
+}
 //—————————————————————————————— Kero surfaces ——————————————————————————————
 

@@ -20,7 +20,7 @@ OnMouseDoubleClick
 
 
 //commented out because i honestly dont think i can deal with setting up 5 million petting dialogues rn
-/*OnMouseMove
+OnMouseMove
 {
 	if reference4 != ""
 	{
@@ -28,29 +28,44 @@ OnMouseDoubleClick
 		
 		if stroke % 40 == 0
 		{
-			if reference3 == 0; OnMouseMove.Sakura
-			else; OnMouseMove.Kero
+			if reference3 == 0 {
+				case чалавек {
+					when "Жора" {OnMouseMove.Жора}
+					others {OnMouseMove.Міша}
+				}
+			}
+			//else; OnMouseMove.Kero
 		}
 	}
 }
 
-OnMouseMove.Sakura
+OnMouseMove.Міша
 {
-	if reference4 == "голова"
+	if reference4 == "head"
 	{
-		"\0\s[0]ласки??"
+		"\0\s[4]Э-э-э... я усцешаны, але гэта мне не падабаецца. Мы ж не ведаем адзін аднаго."
+		"\0\s[11]%(нік), гэта не ветліва."
+		"\0\s[11]Рукі прочь ад мяне."
+		"\0\s[11]... Гэта не ветліва."
+		"\0\s[11]%(нік), ці не велаеш, што мы не сябры? Гэта - не ветліва. Не міла."
+		"\0\s[8]Не дакрануй мяне."
+		"\0\s[11]Мы не сябры. Памятай гэтым."
+		--
+		"\x\![raise,OnClose,лашчылі]"
 	}
 }
 
-OnMouseMove.Kero
+OnMouseMove.Жора
 {
-	if reference4 == "голова"
+	if reference4 == "head"
 	{
-		"\1\s[10]ласки..."
+		"\0\s[3]Так мілы з тваёй стараной!"
+		"\0\s[3]Мур......"
+		"\0\s[3]Как ты ведалі што я кот?"
 	}
 }
 
 OnMouseLeaveAll
 {
 	stroke = 0
-}*/
+}
