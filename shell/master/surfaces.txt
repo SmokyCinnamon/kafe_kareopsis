@@ -94,6 +94,10 @@ surface10
 
 	animation5.interval,never
 	animation5.pattern0,overlay,105,0,0,0
+
+	//bugs
+	animation2000.interval,never
+	animation2000.pattern0,overlayfast,2000,0,100,76
 }
 
 

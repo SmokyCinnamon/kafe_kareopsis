@@ -7,6 +7,7 @@ OnTranslate {
 		_talk = EVAL('"' + REPLACE(_talk,'"','""') + '"')
 	}
 	_talk = REPLACE(_talk,"\e","\x\e")
+	_talk = REPLACE(_talk,"\2","\p[2]") //BRAIN SCRAMPLED EGG
 	
 	if RE_SEARCH(_talk,'(Як(\S+))[^Як]') {
 		//doesnt catch punctuation
@@ -28,32 +29,31 @@ OnTranslate {
 			_talk = REPLACE(_talk,"\s[9]","\s")
 		}
 		others {}
-	}
+	}*/
 	if "брудны" _in_ ежа {
 		case ежа {
 			when "Cinnamon Bun", "Улитка с Корицей", "Булачка з Карыцей" {
-				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[0]\i[2000]")
 			}
 			when "Bagel", "Бейгл", "Бэйгл" {
-				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[1]\i[2000]")
 			}
 			when "Cheesecake", "Чизкейк", "Сырны пірог" {
-				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[2]\i[2000]")
 			}
 			when "Donut", "Пончик", "Пончык" {
-				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[3]\i[2000]")
 			}
 			when "Macarons", "Макарон", "Макарон" {
-				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[4]\i[2000]")
 			}
 			when "Chocolates", "Шоколад", "Шакалад" {
-				_talk = REPLACE(_talk,"\s[10]","\s\i[1]")
+				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[5]\i[2000]")
 			}
 			others {}
 		}
 	}
 	else {
-		*/
 		case ежа {
 			when "Cinnamon Bun", "Улитка с Корицей", "Булачка з Карыцей" {
 				_talk = REPLACE(_talk,"\s[10]","\s[10]\i[0]")
@@ -75,7 +75,7 @@ OnTranslate {
 			}
 			others {}
 		}
-	//}
+	}
 	case напой {
 		when "Coffee", "Кофе", "Кава" {
 			_talk = REPLACE(_talk,"\s[20]","\s[20]\i[0]")
