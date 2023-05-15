@@ -13,9 +13,12 @@ descript
 //—————————————————————————————— Sakura surfaces ——————————————————————————————
 
 surface0
+{
+element0,overlay,surface0.png,0,0	
+
 
 //blink
-{	
+	
 	animation0.interval,random,5
 	animation0.pattern1,overlay,1002,0,0,0
 	animation0.pattern2,overlay,1001,100,0,0
@@ -110,3 +113,100 @@ surface.append0-11,!10
 }
 //—————————————————————————————— Kero surfaces ——————————————————————————————
 
+//test
+surface10
+{
+animation21.interval,never
+	animation21.pattern7,overlay,2101,0,0,0
+animation22.interval,never
+	animation22.pattern8,overlay,2102,0,0,0
+animation23.interval,never
+	animation23.pattern9,overlay,2103,0,0,0
+animation24.interval,never
+	animation24.pattern10,overlay,2104,0,0,0
+animation25.interval,never
+	animation25.pattern11,overlay,2105,0,0,0
+animation26.interval,never
+	animation26.pattern12,overlay,2106,0,0,0
+animation27.interval,never
+	animation27.pattern13,overlay,2107,0,0,0
+animation28.interval,never
+	animation28.pattern14,overlay,2108,0,0,0
+animation29.interval,never
+	animation29.pattern15,overlay,2109,0,0,0
+}
+
+
+
+//bagel
+surface21
+{
+element1,overlay,surface2101.png,0,0
+}
+
+//cinnamon bun
+surface22
+{
+element1,overlay,surface2102.png,0,0
+}
+
+//chocolates
+surface23
+{
+element1,overlay,surface2103.png,0,0
+}
+
+//donut
+surface24
+{
+element1,overlay,surface2104.png,0,0
+}
+
+//macarons
+surface25
+{
+element1,overlay,surface2105.png,0,0
+}
+
+//cheesecake
+surface26
+{
+element1,overlay,surface2106.png,0,0
+}
+
+//tea
+surface27
+{
+element1,overlay,surface2107.png,0,0
+}
+
+//coffee
+surface28
+{
+element1,overlay,surface2108.png,0,0
+}
+
+//smoothie
+surface29
+{
+element1,overlay,surface2109.png,0,0
+}
+
+//smoke1
+surface31
+{
+element1,overlay,surface2201.png,0,0
+}
+
+//smoke2
+surface32
+{
+element1,overlay,surface2202.png,0,0
+
+}
+
+//smoke3
+surface33
+{
+element1,overlay,surface2203.png,0,0
+}
