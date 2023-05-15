@@ -14,17 +14,17 @@ descript
 
 surface0
 {
-element0,overlay,surface0.png,0,0	
+	element0,overlay,surface0.png,0,0	
 
 
-//blink
+	//blink
 	
 	animation0.interval,random,5
 	animation0.pattern1,overlay,1002,0,0,0
 	animation0.pattern2,overlay,1001,100,0,0
 	animation0.pattern3,overlay,-1,50,0,0
 	
-//talk
+	//talk
 
 	animation1.interval,talk,4
 	animation1.pattern0,alternativestart, (2,3,4)
@@ -45,65 +45,26 @@ element0,overlay,surface0.png,0,0
 }
 
 
-//talking pose (default with arm)
-surface1
-{
-element0,overlay,surface1501.png,0,0
-}
+//talking pose (default with arm) surface1
 
-//content/eyes closed
-surface2
-{
-element0,overlay,surface1502.png,0,0
-}
+//content/eyes closed surface2
 
-//smiling
-surface3
-{
-element0,overlay,surface1503.png,0,0
-}
+//smiling surface3
 
-//worried
-surface4
-{
-element0,overlay,surface1504.png,0,0
-}
+//worried surface4
 
-//embarassed
-surface5
-{
-element0,overlay,surface1505.png,0,0
-}
 
-//bored
-surface6
-{
-element0,overlay,surface1506.png,0,0
-}
+//embarassed surface5
 
-//sad
-surface7
-{
-element1,overlay,surface1507.png,0,0
-}
+//bored surface6
 
-//distant
-surface8
-{
-element1,overlay,surface1508.png,0,0
-}
+//sad surface7
 
-//shocked
-surface9
-{
-element1,overlay,surface1509.png,0,0
-}
+//distant surface8
 
-//angry
-surface11
-{
-element1,overlay,surface1510.png,0,0
-}
+//shocked surface9
+
+//angry surface11
 
 mouseup0,head,system:hand
 
@@ -111,102 +72,51 @@ surface.append0-11,!10
 {
 	collision,145,30,213,65,head
 }
-//—————————————————————————————— Kero surfaces ——————————————————————————————
 
-//test
+
+//food
 surface10
 {
-animation21.interval,never
-	animation21.pattern7,overlay,2101,0,0,0
-animation22.interval,never
-	animation22.pattern8,overlay,2102,0,0,0
-animation23.interval,never
-	animation23.pattern9,overlay,2103,0,0,0
-animation24.interval,never
-	animation24.pattern10,overlay,2104,0,0,0
-animation25.interval,never
-	animation25.pattern11,overlay,2105,0,0,0
-animation26.interval,never
-	animation26.pattern12,overlay,2106,0,0,0
-animation27.interval,never
-	animation27.pattern13,overlay,2107,0,0,0
-animation28.interval,never
-	animation28.pattern14,overlay,2108,0,0,0
-animation29.interval,never
-	animation29.pattern15,overlay,2109,0,0,0
+	animation0.interval,never
+	animation0.pattern0,overlay,100,0,0,0
+
+	animation1.interval,never
+	animation1.pattern0,overlay,101,0,0,0
+	
+	animation2.interval,never
+	animation2.pattern0,overlay,102,0,0,0
+
+	animation3.interval,never
+	animation3.pattern0,overlay,103,0,0,0
+
+	animation4.interval,never
+	animation4.pattern0,overlay,104,0,0,0
+
+	animation5.interval,never
+	animation5.pattern0,overlay,105,0,0,0
 }
 
 
+//drinks
 
-//bagel
-surface21
+surface20
 {
-element1,overlay,surface2101.png,0,0
-}
 
-//cinnamon bun
-surface22
-{
-element1,overlay,surface2102.png,0,0
-}
+	animation0.interval,never
+	animation0.pattern0,overlay,200,0,0,0
 
-//chocolates
-surface23
-{
-element1,overlay,surface2103.png,0,0
-}
-
-//donut
-surface24
-{
-element1,overlay,surface2104.png,0,0
-}
-
-//macarons
-surface25
-{
-element1,overlay,surface2105.png,0,0
-}
-
-//cheesecake
-surface26
-{
-element1,overlay,surface2106.png,0,0
-}
-
-//tea
-surface27
-{
-element1,overlay,surface2107.png,0,0
-}
-
-//coffee
-surface28
-{
-element1,overlay,surface2108.png,0,0
-}
-
-//smoothie
-surface29
-{
-element1,overlay,surface2109.png,0,0
-}
-
-//smoke1
-surface31
-{
-element1,overlay,surface2201.png,0,0
-}
-
-//smoke2
-surface32
-{
-element1,overlay,surface2202.png,0,0
+	animation1.interval,never
+	animation1.pattern0,overlay,201,0,0,0
+	
+	animation2.interval,never
+	animation2.pattern0,overlay,202,0,0,0
 
 }
 
-//smoke3
-surface33
+surface.append,200,201
 {
-element1,overlay,surface2203.png,0,0
+	animation0.interval,always
+	animation0.pattern0,overlay,2201,500,0,0
+	animation0.pattern1,overlay,2202,500,0,0
+	animation0.pattern2,overlay,2203,500,0,0
 }

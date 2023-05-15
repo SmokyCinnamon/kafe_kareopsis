@@ -21,21 +21,27 @@ scope,0
 
 }
 
-group,F
+group,D
 {
-scope,0
-
-21,bagel
-22,cinnamon bun
-23,chocolates
-24,donuts
-25,macarons
-26,cheesecake
-27,tea
-28,coffee
-29,smoothie
-31,smoke1
-32,smoke2
-33,smoke3
-
+	scope,2
+	20,plate(cup)
 }
+
+//group,F
+//{
+//scope,0
+
+//21,bagel
+//22,cinnamon bun
+//23,chocolates
+//24,donuts
+//25,macarons
+//26,cheesecake
+//27,tea
+//28,coffee
+//29,smoothie
+//31,smoke1
+//32,smoke2
+//33,smoke3
+
+//}
